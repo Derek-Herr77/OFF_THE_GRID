@@ -6,6 +6,7 @@ public class spawner : MonoBehaviour
 {
     public GameObject cube;
     public float spawn_time = 0.5f;
+    public float cube_speed;
     private bool spawning = false;
     private Vector3 pos;
     private float randx;

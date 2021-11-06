@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class gun_fire1 : MonoBehaviour
 {
+    public ParticleSystem bullet;
     public Animator animator;
     public InputActionReference fire_reference = null;
 
@@ -21,6 +22,6 @@ public class gun_fire1 : MonoBehaviour
     public void fire_gun(InputAction.CallbackContext context)
     {
         animator.Play("gun_fire", -1, 0f);
-        Debug.Log("THIS HAS WORKED");
+        bullet.Play();
     }
 }

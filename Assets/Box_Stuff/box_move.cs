@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class box_move : MonoBehaviour
 {
+    private float box_speed;
+    public float timeNow;
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(-Vector3.forward * Time.deltaTime * 3);
+        timeNow = Time.realtimeSinceStartup;
+        box_speed = timeNow / 4;
+        transform.Translate(-Vector3.forward * Time.deltaTime * box_speed);
     }
 }
