@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
+using TMPro;
 
 public class damage_player : MonoBehaviour
 {
@@ -14,17 +15,37 @@ public class damage_player : MonoBehaviour
     public AudioSource sound;
     public AudioSource sound_crowd;
     public AudioSource lose_sound;
+    public GameObject notes;
+    public List<string> notes_list = new List<string>();
 
+
+
+    private void Start()
+    {
+        populate_list();
+    }
     private void Update()
     {
+        //game ends
         if(hit_count >= 5)
         {
             event_system.GetComponent<GameController>().in_game = false;
-            hit_count = 0;
             StartCoroutine(play_crowd());
             lose_sound.Play();
+            //call stuff for the notes
+            StartCoroutine(note_play());
+            hit_count = 0;
         }
 
+
+        IEnumerator note_play()
+        {
+            notes.SetActive(true);
+            string note = notes_list[Random.Range(0, notes_list.Count - 1)];
+            notes.GetComponent<TextMeshProUGUI>().text = note;
+            yield return new WaitForSeconds(8f);
+            notes.SetActive(false);
+        }
         IEnumerator play_crowd()
         {
             yield return new WaitForSeconds(2f);
@@ -64,4 +85,17 @@ public class damage_player : MonoBehaviour
         }
 
     }
+
+    public void populate_list()
+    {
+        notes_list.Add("WOW! YOU'RE REALLY GOOD AT THIS!");
+        notes_list.Add("NICE TRY BUCKO!");
+        notes_list.Add("SICK MOVES AL PACINO!");
+        notes_list.Add("SICK TRICKS! TRY AGAIN!");
+        notes_list.Add("I'M VERY SLEEP DEPRIVED!");
+        notes_list.Add("NICE JOB! I THINK YOU'RE PRETTY COOL!");
+        notes_list.Add("ARE YOU FAMOUS!?");
+    }
+
+
 }
