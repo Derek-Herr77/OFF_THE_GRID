@@ -9,7 +9,6 @@ public class box_hit : MonoBehaviour
     
     public void box_is_hit()
     {
-        Debug.Log("position: " + transform.position + "rotation" + transform.rotation);
         Instantiate(cube_destroyed, transform.position, transform.rotation);
         Destroy(gameObject);
     }
